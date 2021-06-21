@@ -8,6 +8,7 @@ module.exports = {
         alias: {
             '@assets': resolvePath('./src/assets'),
             '@store': resolvePath('./src/store'),
+            '@player': resolvePath('./src/player'),
         }
     },
   // ...
