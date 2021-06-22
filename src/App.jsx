@@ -3,6 +3,7 @@ import "@assets/style.scss"
 import siteBackground from "@assets/img/background.jpg"
 import { useEffect } from "react"
 import Player from "@player"
+import Playlist from "@playlist"
 
 const App = () => {
     useEffect(() => {
@@ -29,6 +30,7 @@ const App = () => {
 
             <div className="container">
                 <Player />
+                <Playlist />
             </div>
 
         </div>
