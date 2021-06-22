@@ -1,7 +1,8 @@
 import { combineReducers, createStore } from "redux"
+import playerReducer from "@store/player"
 
 const rootReducer = combineReducers({
-    // comming soon
+    player: playerReducer,
 })
 
 const store = createStore(rootReducer)

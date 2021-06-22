@@ -139,6 +139,7 @@
     &__time {
         color: $primary-color;
         position: relative;
+        cursor: default; // remove cursor: text
         height: 16px;
 
         &-current {
@@ -161,8 +162,11 @@
         height: 4px;
         width: 100%;
 
+        @media (max-width: $media-mobile) {
+            height: 10px;
+        }
+
         &-thumb {
-            transition: all .1s ease;
             border-radius: inherit;
             position: absolute;
             max-width: 100%;
