@@ -7,7 +7,7 @@ import PlayBtn from "@player/components/play-btn"
 import ShuffleBtn from "@player/components/shuffle-btn"
 import RepeatBtn from "@player/components/repeat-btn"
 import VolumeBtn from "@player/components/volume-btn"
-import { setIsPlaying, setCurrentTime, setDuration, setLoadedTime } from "@store/player"
+import { setIsPlaying, setCurrentTime, setDuration, setLoadedTime, setVolume } from "@store/player"
 
 let audio = new Audio()
 
@@ -17,12 +17,15 @@ const Player = () => {
     const currentTime = useSelector((state) => state.player.currentTime)
     const loadedTime  = useSelector((state) => state.player.loadedTime)
     const duration    = useSelector((state) => state.player.duration)
+    const volume      = useSelector((state) => state.player.volume)
 
     useEffect(() => {
         audio.ontimeupdate     = onAudioTimeUpdate
         audio.onprogress       = onAudioLoadBufferUpdate
         audio.onloadedmetadata = onLoadedMetadata
         audio.onended          = onAudioEnded
+
+        audio.volume = volume / 100
     }, [])
 
     return (
@@ -62,7 +65,10 @@ const Player = () => {
 
                             <ShuffleBtn className="controls__btn_right" />
                             <RepeatBtn />
-                            <VolumeBtn />
+                            <VolumeBtn
+                                volume={volume}
+                                onChange={onUserChangesVolume}
+                            />
                         </div>
                     </div>
                 </div>
@@ -106,6 +112,16 @@ const Player = () => {
         } catch (err) {
             audio.currentTime = currentTime
             dispatch(setCurrentTime(currentTime))
+        }
+    }
+
+    function onUserChangesVolume(newVolume) {
+        try {
+            audio.volume = newVolume / 100
+            dispatch(setVolume(newVolume))
+        } catch(e) {
+            audio.volume = volume
+            dispatch(setVolume(volume))
         }
     }
 }
