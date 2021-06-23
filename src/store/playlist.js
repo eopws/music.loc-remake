@@ -1,3 +1,5 @@
+import trackImg from '@assets/img/playlist/song-img.png'
+
 const SET_TRACKS        = 'SET_TRACKS'
 const SET_CURRENT_TRACK = 'SET_LOADED_TIME'
 
@@ -45,7 +47,11 @@ function playlistReducer(state = defaultState, action) {
             }
 
             if (!state.tracks[nextTrackId]) {
-                return state
+                if (action.payload === 'next' && state.repeat) {
+                    nextTrackId = 0
+                } else {
+                    return state
+                }
             }
 
             const nextTrack   = Object.assign({}, state.tracks[nextTrackId])

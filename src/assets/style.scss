@@ -341,7 +341,122 @@ body {
 // # Add song modal window #
 // #########################
 .add-song-modal {
-    &_hidden {
-        display: none;
+    font: 300 normal 15px $primary-font, sans-serif;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    background: #FFF;
+    position: absolute;
+    max-width: 370px;
+    display: none;
+    width: 100%;
+    z-index: 99;
+    left: 50%;
+    top: 50%;
+
+    &_show {
+        display: block;
+    }
+
+    &__title {
+        background: #E93A4F;
+        text-align: center;
+        line-height: 50px;
+        font-weight: 500;
+        color: #FFF;
+        height: 50px;
+    }
+
+    &__content {
+        padding: 25px;
+    }
+}
+
+.add-song-form {
+    &__btn {
+        transition: .5s all ease;
+        background: #959595;
+        border-radius: 50px;
+        margin: 0 auto;
+        display: block;
+        color: #FFF;
+        padding: 10px;
+        border: 0;
+
+        &:hover {
+            background: #FFF;
+            color: #959595;
+        }
+    }
+
+    &__image-box {
+        height: 130px;
+        width: 100%;
+    }
+
+    &__inputs-box {
+        margin-top: 20px;
+    }
+
+    &__text-input {
+        justify-content: space-between;
+        margin-bottom: 5px;
+        display: flex;
+    }
+
+    &__upload-audio-wrapper {
+        margin-top: 15px;
+    }
+}
+
+.upload-image-box {
+    border: 2px dashed #D6D6D7;
+    position: relative;
+    text-align: center;
+
+    &__inner {
+        transform: translate(-50%, -50%);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+    }
+
+    &__title {
+        margin-bottom: 10px;
+        color: #828082;
+        display: block;
+    }
+
+    &__secondary-text {
+        margin-bottom: 10px;
+        color: #CBCCCC;
+        display: block;
+    }
+}
+
+.add-song-footer {
+    display: flex;
+
+    &__btn {
+        transition: .5s all ease;
+        box-sizing: border-box;
+        border: #DFDFDF;
+        color: #6C686B;
+        height: 35px;
+        border: 0;
+        flex: 1;
+
+        &:hover {
+            background: #FFF;
+        }
+
+        &_green {
+            background: #74BF2F;
+            color: #FFF;
+
+            &:hover {
+                background: #FFF;
+                color: #74BF2F;
+            }
+        }
     }
 }

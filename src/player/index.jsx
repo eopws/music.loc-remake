@@ -7,8 +7,11 @@ import PlayBtn from "@player/components/play-btn"
 import ShuffleBtn from "@player/components/shuffle-btn"
 import RepeatBtn from "@player/components/repeat-btn"
 import VolumeBtn from "@player/components/volume-btn"
+import AddSongBtn from "@player/components/add-song-btn"
 import { setIsPlaying, setCurrentTime, setDuration, setLoadedTime, setVolume } from "@store/player"
-import { turnPrevTrack, turnNextTrack } from "@store/playlist"
+import {showModal } from "@store/add-song"
+import { turnPrevTrack, turnNextTrack, setRepeat } from "@store/playlist"
+
 
 let audio = new Audio()
 
@@ -21,6 +24,7 @@ const Player = () => {
     const duration    = useSelector((state) => state.player.duration)
     const volume      = useSelector((state) => state.player.volume)
     const track       = useSelector((state) => state.playlist.currentTrack)
+    const repeat      = useSelector((state) => state.playlist.repeat)
 
     useEffect(() => {
         audio.ontimeupdate     = onAudioTimeUpdate
@@ -79,10 +83,16 @@ const Player = () => {
                             />
 
                             <ShuffleBtn className="controls__btn_right" />
-                            <RepeatBtn />
+                            <RepeatBtn
+                                repeat={repeat}
+                                onClick={onUserSetsRepeat}
+                            />
                             <VolumeBtn
                                 volume={volume}
                                 onChange={onUserChangesVolume}
+                            />
+                            <AddSongBtn
+                                onClick={onAddSongClick}
                             />
                         </div>
                     </div>
@@ -141,6 +151,10 @@ const Player = () => {
         }
     }
 
+    function onUserSetsRepeat() {
+        dispatch(setRepeat(!repeat))
+    }
+
     function onUserChangesTime(newTime) {
         try {
             audio.currentTime = newTime
@@ -159,6 +173,10 @@ const Player = () => {
             audio.volume = volume
             dispatch(setVolume(volume))
         }
+    }
+
+    function onAddSongClick() {
+        dispatch(showModal())
     }
 }
 

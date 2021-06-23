@@ -4,6 +4,7 @@ import siteBackground from "@assets/img/background.jpg"
 import { useEffect } from "react"
 import Player from "@player"
 import Playlist from "@playlist"
+import AddSong from "@add-track"
 
 const App = () => {
     useEffect(() => {
@@ -32,6 +33,8 @@ const App = () => {
                 <Player />
                 <Playlist />
             </div>
+
+            <AddSong />
 
         </div>
     )

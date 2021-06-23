@@ -10,6 +10,7 @@ module.exports = {
             '@store': resolvePath('./src/store'),
             '@player': resolvePath('./src/player'),
             '@playlist': resolvePath('./src/playlist'),
+            '@add-track': resolvePath('./src/add-track'),
             '@utils': resolvePath('./src/utils'),
         }
     },
