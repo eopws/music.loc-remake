@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import UploadImage from "@add-track/components/upload-image"
 import { hideModal } from "@store/add-song"
-import { useState } from "react"
+import { useRef, useState } from "react"
 
 const AddSong = () => {
     const dispatch            = useDispatch()
@@ -10,6 +10,7 @@ const AddSong = () => {
     const [title, setTitle]   = useState('')
     const [image, setImage]   = useState(null)
     const [audio, setAudio]   = useState(null)
+    const audioInput          = useRef(null)
 
     return (
         <div className={'add-song-modal ' + (isShown ? 'add-song-modal_show' : '')}>
@@ -22,7 +23,10 @@ const AddSong = () => {
                 onSubmit={onFormSubmit}
             >
                 <div className="add-song-modal__content">
-                    <UploadImage onChange={onImageChanges} />
+                    <UploadImage
+                        image={image}
+                        onChange={onImageChanges}
+                    />
 
                     <div className="add-song-form__inputs-box">
                         <label className="add-song-form__text-input">
@@ -49,8 +53,14 @@ const AddSong = () => {
                             className="add-song-form__btn"
                             onClick={openAudioSelection}
                         >
-                            Upload audio
+                            {
+                                audio !== null ?
+                                    'Audio uploaded'
+                                    :
+                                    'Upload audio'
+                            }
                             <input
+                                ref={audioInput}
                                 type="file"
                                 accept="audio/*"
                                 hidden
@@ -90,10 +100,8 @@ const AddSong = () => {
     }
 
     function openAudioSelection(e) {
-        const finput = e.target.querySelector('input[type="file"]')
-
-        if (finput) {
-            finput.click()
+        if (audioInput.current) {
+            audioInput.current.click()
         }
     }
 

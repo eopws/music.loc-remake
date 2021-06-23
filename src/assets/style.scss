@@ -420,6 +420,20 @@ body {
         top: 50%;
     }
 
+    &__image-preview {
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: #FFF;
+        background-size: contain;
+        position: absolute;
+        cursor: pointer;
+        height: 100%;
+        width: 100%;
+        z-index: 2;
+        left: 0;
+        top: 0;
+    }
+
     &__title {
         margin-bottom: 10px;
         color: #828082;
