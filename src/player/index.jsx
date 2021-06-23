@@ -10,7 +10,7 @@ import VolumeBtn from "@player/components/volume-btn"
 import AddSongBtn from "@player/components/add-song-btn"
 import { setIsPlaying, setCurrentTime, setDuration, setLoadedTime, setVolume } from "@store/player"
 import {showModal } from "@store/add-song"
-import { turnPrevTrack, turnNextTrack, setRepeat } from "@store/playlist"
+import { shufflePlaylist, turnPrevTrack, turnNextTrack, setRepeat } from "@store/playlist"
 
 
 let audio = new Audio()
@@ -82,7 +82,10 @@ const Player = () => {
                                 isRight={true}
                             />
 
-                            <ShuffleBtn className="controls__btn_right" />
+                            <ShuffleBtn
+                                className="controls__btn_right"
+                                onClick={onShuffleClick}
+                            />
                             <RepeatBtn
                                 repeat={repeat}
                                 onClick={onUserSetsRepeat}
@@ -149,6 +152,10 @@ const Player = () => {
         } else {
             dispatch(turnNextTrack())
         }
+    }
+
+    function onShuffleClick() {
+        dispatch(shufflePlaylist())
     }
 
     function onUserSetsRepeat() {

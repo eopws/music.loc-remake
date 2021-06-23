@@ -13,11 +13,11 @@ const Playlist = () => {
             <div className="track-list__inner">
                 {Object.entries(tracks).map(([id, track]) =>
                     <Track
-                        key={id}
-                        isActive={currentTrackId === +id}
+                        key={track.id}
+                        isActive={currentTrackId === track.id}
                         isPlaying={isPlaying}
                         track={track}
-                        onClick={() => onUserSetsTrack(id)}
+                        onClick={() => onUserSetsTrack(track.id)}
                     />
                 )}
             </div>
@@ -25,13 +25,13 @@ const Playlist = () => {
     )
 
     function onUserSetsTrack(trackId) {
-        const newCurrentTrack = Object.assign({}, tracks[trackId])
+        const newCurrentTrack = Object.assign({}, tracks.find((track) => track.id === trackId))
 
         if (!newCurrentTrack) {
             return null
         }
 
-        newCurrentTrack.id = +trackId
+        newCurrentTrack.id = trackId
 
         dispatch(setCurrentTrack(newCurrentTrack))
     }
