@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import UploadImage from "@add-track/components/upload-image"
 import { hideModal } from "@store/add-song"
 import { useRef, useState } from "react"
+import { createTrack } from "@http/tracksAPI"
 
 const AddSong = () => {
     const dispatch            = useDispatch()
@@ -77,7 +78,10 @@ const AddSong = () => {
                     >
                         Cancel
                     </button>
-                    <button className="add-song-footer__btn add-song-footer__btn_green">Upload</button>
+                    <button
+                        className="add-song-footer__btn add-song-footer__btn_green"
+                        onClick={onUploadTrack}
+                    >Upload</button>
                 </div>
             </form>
         </div>
@@ -111,6 +115,22 @@ const AddSong = () => {
 
     function onCancel(e) {
         dispatch(hideModal())
+    }
+
+    function onUploadTrack(e) {
+        if (audio === null) {
+            return null
+        }
+
+        const formData = new FormData()
+
+        formData.append('author', author)
+        formData.append('title', title)
+        formData.append('img', image)
+        formData.append('audio', audio)
+
+        createTrack(formData)
+            .then(() => dispatch(hideModal()))
     }
 }
 

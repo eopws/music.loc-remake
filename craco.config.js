@@ -11,6 +11,7 @@ module.exports = {
             '@player': resolvePath('./src/player'),
             '@playlist': resolvePath('./src/playlist'),
             '@add-track': resolvePath('./src/add-track'),
+            '@http': resolvePath('./src/http'),
             '@utils': resolvePath('./src/utils'),
         }
     },
