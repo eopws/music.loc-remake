@@ -1,7 +1,8 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 
 const UploadImage = ({image, onChange}) => {
-    const imageInput = useRef(null)
+    const [drag, setDrag] = useState(0)
+    const imageInput      = useRef(null)
 
     let imageUrl
 
@@ -12,7 +13,13 @@ const UploadImage = ({image, onChange}) => {
     }
 
     return (
-        <div className="add-song-form__image-box upload-image-box">
+        <div
+            className={'add-song-form__image-box upload-image-box ' + (drag ? 'upload-image-box_hover' : '')}
+            onDragStart={onDragStart}
+            onDragLeave={onDragEnd}
+            onDragOver={onDragStart}
+            onDrop={onDrop}
+        >
             {
                 image !== null ?
                     <div
@@ -41,17 +48,43 @@ const UploadImage = ({image, onChange}) => {
                         name="track-image"
                         type="file"
                         hidden
-                        onChange={onChange}
+                        onChange={onImageSet}
                     />
                 </button>
             </div>
         </div>
     )
 
+    function onDragStart(e) {
+        e.preventDefault()
+
+        setDrag(true)
+    }
+
+    function onDragEnd(e) {
+        e.preventDefault()
+
+        setDrag(false)
+    }
+
+    function onDrop(e) {
+        e.preventDefault()
+
+        let file = e.dataTransfer.files[0]
+
+        onChange(file)
+
+        setDrag(false)
+    }
+
     function openImageSelection(e) {
         if (imageInput.current) {
             imageInput.current.click()
         }
+    }
+
+    function onImageSet(e) {
+        onChange(e.target.files[0])
     }
 }
 

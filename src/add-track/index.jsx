@@ -87,8 +87,8 @@ const AddSong = () => {
         e.preventDefault()
     }
 
-    function onImageChanges(e) {
-        setImage(e.target.files[0])
+    function onImageChanges(image) {
+        setImage(image)
     }
 
     function onAuthorChanges(e) {

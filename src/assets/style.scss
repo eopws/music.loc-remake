@@ -413,6 +413,10 @@ body {
     position: relative;
     text-align: center;
 
+    &_hover {
+        opacity: .7;
+    }
+
     &__inner {
         transform: translate(-50%, -50%);
         position: absolute;
