@@ -48,19 +48,22 @@ body {
         flex-shrink: 0;
         width: 168px;
 
-        img {
-            transform: translate(-50%, -50%);
-            position: absolute;
-            border-radius: 5px;
-            height: 100%;
-            width: 100%;
-            left: 50%;
-            top: 50%;
-        }
-
         @media (max-width: $media-mobile) {
             display: none;
         }
+    }
+
+    &__image {
+        transform: translate(-50%, -50%);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        position: absolute;
+        border-radius: 5px;
+        height: 100%;
+        width: 100%;
+        left: 50%;
+        top: 50%;
     }
 
     &__content {
@@ -83,6 +86,12 @@ body {
 
             @media (min-width: $media-mobile) {
                 display: none;
+            }
+
+            img {
+                border-radius: 3px;
+                height: 100%;
+                width: 100%;
             }
         }
 
@@ -240,9 +249,17 @@ body {
 // # Tracks playlist #
 // ###################
 .track-list {
+    padding-top: 21px;
+
     &__inner {
-        padding-top: 21px;
+        max-height: calc(100vh - 168px - 44px);
+        overflow: auto;
         display: block;
+        height: 100%;
+
+        @media (max-width: $media-mobile) {
+            max-height: calc(100vh - 168px - 5px);
+        }
     }
 
     &__item {
@@ -281,10 +298,15 @@ body {
     }
 
     &__image {
-        img {
-            height: 100%;
-            width: 100%;
-        }
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        border-radius: 3px;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
     }
 
     &__icon {

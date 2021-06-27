@@ -122,15 +122,31 @@ const AddSong = () => {
             return null
         }
 
-        const formData = new FormData()
+        // estimate duration
+        let testAudio = new Audio()
 
-        formData.append('author', author)
-        formData.append('title', title)
-        formData.append('img', image)
-        formData.append('audio', audio)
+        testAudio.src = URL.createObjectURL(audio)
 
-        createTrack(formData)
-            .then(() => dispatch(hideModal()))
+        testAudio.onloadedmetadata = () => {
+            const formData = new FormData()
+
+            formData.append('title', title)
+            formData.append('author', author)
+            formData.append('duration', testAudio.duration)
+
+            if (image) {
+                formData.append('img', image)
+            }
+
+            formData.append('audio', audio)
+
+            createTrack(formData)
+                .finally(() => dispatch(hideModal()))
+        }
+
+        testAudio.onerror = () => {
+            dispatch(hideModal())
+        }
     }
 }
 

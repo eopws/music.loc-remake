@@ -1,6 +1,5 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import noSongsImage from "@assets/img/player/no-songs.svg"
 import ProgressBar from "@player/components/progress-bar"
 import ChangeTrackBtn from "@player/components/change-song-btn"
 import PlayBtn from "@player/components/play-btn"
@@ -36,28 +35,36 @@ const Player = () => {
         audio.volume = volume / 100
 
         if (track) {
-            audio.src = track.url
+            audio.src = process.env.REACT_APP_API_URL + 'static/audio/' + track.audio
             audio.play()
             dispatch(setIsPlaying(true))
         }
     }, [track])
 
+    let headerImage = track ? track.img : 'track-default-img.png';
+    headerImage = process.env.REACT_APP_API_URL + 'static/img/' + headerImage
+
     return (
         <section className="player">
             <div className="player__inner">
                 <div className="player__image-wrapper">
-                    <img src={track?.img ?? noSongsImage} alt="No song choosen" />
+                    <div
+                        className="player__image"
+                        style={{
+                            backgroundImage: 'url(' + headerImage + ')'
+                        }}
+                    ></div>
                 </div>
 
                 <div className="player__content">
                     <div className="player__top-bar">
                         <div className="player__top-bar-mobile-image">
-                            <img src={track?.img ?? noSongsImage} alt="No song choosen" />
+                            <img src={headerImage} alt="No song choosen" />
                         </div>
 
                         <div>
-                            <h2 className="player__top-bar-song">{track?.title}</h2>
-                            <span className="player__top-bar-author">{track?.author}</span>
+                            <h2 className="player__top-bar-song">{track ? track.title : ''}</h2>
+                            <span className="player__top-bar-author">{track ? track.author : ''}</span>
                         </div>
                     </div>
 

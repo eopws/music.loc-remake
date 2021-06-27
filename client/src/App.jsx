@@ -1,4 +1,5 @@
 import "@assets/reset.css"
+import "@assets/scrollbar.css"
 import "@assets/style.scss"
 import siteBackground from "@assets/img/background.jpg"
 import { useEffect } from "react"

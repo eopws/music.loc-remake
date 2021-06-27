@@ -1,5 +1,3 @@
-import trackImg from '@assets/img/playlist/song-img.png'
-
 const SET_TRACKS        = 'SET_TRACKS'
 const SET_CURRENT_TRACK = 'SET_LOADED_TIME'
 

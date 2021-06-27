@@ -1,3 +1,4 @@
+import formatTime from "@utils/format-time"
 
 const Track = ({track, isActive, isPlaying, onClick}) => {
 
@@ -13,9 +14,12 @@ const Track = ({track, isActive, isPlaying, onClick}) => {
 
                     <div className="track__image-wrapper">
 
-                        <div className="track__image">
-                            <img src={track.img} alt="" />
-                        </div>
+                        <div
+                            className="track__image"
+                            style={{
+                                backgroundImage: 'url(' + process.env.REACT_APP_API_URL + 'static/img/' + track.img + ')'
+                            }}
+                        ></div>
 
                         <div className={'track__icon ' + (isActive ? 'track__icon_show' : '')}>
                             {
@@ -34,7 +38,7 @@ const Track = ({track, isActive, isPlaying, onClick}) => {
                     </div>
 
                     <div className="track__time">
-                        <span>{track.duration}</span>
+                        <span>{formatTime(track.duration)}</span>
                     </div>
 
                 </div>

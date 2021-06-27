@@ -1,5 +1,7 @@
 // transforms time in second to hh:mm:ss format (hours can be missing)
 function formatTime(time) {
+    time = Math.round(+time)
+
     let formattedTime = ''
  
     let hours   = Math.floor(time / 3600) >= 1 ? Math.floor(time / 3600) : ''
